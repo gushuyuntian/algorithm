@@ -5,43 +5,29 @@ import java.util.Random;
 
 /**
  * @author 孙雪超
- * @date 2016年4月5日 下午2:24:23
+ * @date 2016年4月5日 下午2:24:23 <br/>
+ *       介绍：
+ * 
+ *       快速排序是由东尼·霍尔所发展的一种排序算法。在平均状况下，排序 n 个项目要Ο(n log n) 次比较。<br/>
+ *       在最坏状况下则需要Ο(n2)次比较，但这种状况并不常见。事实上，快速排序通常明显比其他Ο(n log n) 算法更快，<br/>
+ *       因为它的内部循环（inner loop）可以在大部分的架构上很有效率地被实现出来，且在大部分真实世界的数据，<br/>
+ *       可以决定设计的选择，减少所需时间的二次方项之可能性。
+ * 
+ *       步骤：
+ * 
+ *       1.从数列中挑出一个元素，称为 “基准”（pivot）.<br/>
+ *       2.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边
+ *       ）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。 <br/>
+ *       3.递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
  */
 public class QuickSort {
 
 	/**
-	 * 排序
-	 * 
-	 * @param a
+	 * @param n
 	 * @param left
 	 * @param right
-	 * @return a
 	 */
-	public int[] sort(int[] a, int left, int right) {
-		if (left < right) {
-			int low = left;
-			int high = right;
-			int pivot = getPivot(a, low, high);
-			while (low < high) {
-				while (low < high && a[high] >= pivot) {
-					high--;
-				}
-				while (low < high && a[low] <= pivot) {
-					low++;
-				}
-				if (a[low] > a[high]) {
-					a[low] = a[low] + a[high];
-					a[high] = a[low] - a[high];
-					a[low] = a[low] - a[high];
-				}
-			}
-			sort(a, left, low - 1);
-			sort(a, low + 1, right);
-		}
-		return a;
-	}
-
-	public void sort1(int[] n, int left, int right) {
+	public void sort(int[] n, int left, int right) {
 		if (left < right) {
 			int pivot = n[left];
 			int low = left;
@@ -57,43 +43,9 @@ public class QuickSort {
 					n[high] = n[low];
 			}
 			n[low] = pivot;
-			sort1(n, left, low - 1);
-			sort1(n, high + 1, right);
+			sort(n, left, low - 1);
+			sort(n, high + 1, right);
 		}
-	}
-
-	/**
-	 * 获取基准
-	 * 
-	 * @param a
-	 * @param lo
-	 * @param hi
-	 * 
-	 * @return 基准
-	 */
-	public int getPivot(int[] a, int lo, int hi) {
-		int min = a[lo];
-		int middle = a[(lo + hi) / 2];
-		int max = a[hi];
-
-		if (min > middle) {
-			min = min + middle;
-			middle = min - middle;
-			min = min - middle;
-		}
-
-		if (middle > max) {
-			middle = middle + max;
-			max = middle - max;
-			middle = middle - max;
-		}
-
-		if (min > middle) {
-			min = min + middle;
-			middle = min - middle;
-			min = min - middle;
-		}
-		return middle;
 	}
 
 	static void quicksort(int n[], int left, int right) {
@@ -121,6 +73,9 @@ public class QuickSort {
 		return left;
 	}
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		QuickSort quick = new QuickSort();
 		int a[] = new int[100];
@@ -132,7 +87,7 @@ public class QuickSort {
 		int a2[] = Arrays.copyOf(a, a.length);
 
 		long start1 = System.currentTimeMillis();
-		 quick.sort1(a, 0, a.length - 1);
+		quick.sort(a, 0, a.length - 1);
 		System.out.println(System.currentTimeMillis() - start1);
 		for (int i : a) {
 			System.out.print(i + " ");
@@ -140,7 +95,7 @@ public class QuickSort {
 
 		System.out.println();
 		long start2 = System.currentTimeMillis();
-		quick.quicksort(a2, 0, a2.length - 1);
+		QuickSort.quicksort(a2, 0, a2.length - 1);
 		System.out.println(System.currentTimeMillis() - start2);
 
 		for (int i : a2) {
