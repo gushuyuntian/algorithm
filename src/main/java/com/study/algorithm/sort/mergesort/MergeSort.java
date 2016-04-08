@@ -1,6 +1,6 @@
 package com.study.algorithm.sort.mergesort;
 
-import java.util.Random;
+import com.study.algorithm.sort.ArrayUtils;
 
 /**
  * @author 孙雪超
@@ -53,18 +53,13 @@ public class MergeSort {
 			System.out.print(i + " ");
 	}
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		//int[] data = new int[] { 5, 3, 6, 2, 1, 9, 4, 8, 7 };
-		int data[] = new int[100];
-		Random rd = new Random();
-		for (int i = 0; i < data.length; i++) {
-			data[i] = rd.nextInt(data.length);
-		}
-		print(data);
-		mergeSort(data, 0, data.length - 1);
-		System.out.println();
-		System.out.println("排序后的数组：");
-		print(data);
+		int a[] = ArrayUtils.random(100, 0);
+		mergeSort(a, 0, a.length - 1);
+		ArrayUtils.printArray(a);
 	}
 
 }

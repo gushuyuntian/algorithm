@@ -1,7 +1,6 @@
 package com.study.algorithm.sort.quicksort;
 
-import java.util.Arrays;
-import java.util.Random;
+import com.study.algorithm.sort.ArrayUtils;
 
 /**
  * @author 孙雪超
@@ -27,7 +26,7 @@ public class QuickSort {
 	 * @param left
 	 * @param right
 	 */
-	public void sort(int[] n, int left, int right) {
+	static void sort(int[] n, int left, int right) {
 		if (left < right) {
 			int pivot = n[left];
 			int low = left;
@@ -77,30 +76,9 @@ public class QuickSort {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		QuickSort quick = new QuickSort();
-		int a[] = new int[100];
-		Random rd = new Random();
-		for (int i = 0; i < a.length; i++) {
-			a[i] = rd.nextInt(a.length);
-		}
-
-		int a2[] = Arrays.copyOf(a, a.length);
-
-		long start1 = System.currentTimeMillis();
-		quick.sort(a, 0, a.length - 1);
-		System.out.println(System.currentTimeMillis() - start1);
-		for (int i : a) {
-			System.out.print(i + " ");
-		}
-
-		System.out.println();
-		long start2 = System.currentTimeMillis();
-		QuickSort.quicksort(a2, 0, a2.length - 1);
-		System.out.println(System.currentTimeMillis() - start2);
-
-		for (int i : a2) {
-			System.out.print(i + " ");
-		}
+		int a[] = ArrayUtils.random(100, 0);
+		sort(a, 0, a.length - 1);
+		ArrayUtils.printArray(a);
 
 	}
 }

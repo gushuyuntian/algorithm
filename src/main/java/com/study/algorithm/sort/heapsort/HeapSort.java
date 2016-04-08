@@ -58,13 +58,15 @@ public class HeapSort {
 
 		if (index != largest) {
 			ArrayUtils.exchangeElements(array, index, largest);
-
 			maxHeap(array, heapSize, largest);
 		}
 	}
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		int[] array = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3 };
+		int array[] = ArrayUtils.random(10, 0);
 
 		System.out.println("Before heap:");
 		ArrayUtils.printArray(array);
